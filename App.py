@@ -52,9 +52,9 @@ def update(id):
     student = StudentModel.query.filter_by(id=id).first()
 
     if request.method == 'POST':
-           db.session.delete(student)
-           db.session.commit()          
-           if student:
+            db.session.delete(student)
+            db.session.commit()          
+            if student:
                 hobby = request.form.getlist('hobbies')
                 hobbies =','.join(map(str,hobby))
                 first_name=request.form['first_name']
