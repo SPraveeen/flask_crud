@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,redirect
+from flask import Flask, abort,render_template,request,redirect
 from models import db,StudentModel
 app=Flask(__name__)
 
@@ -41,13 +41,12 @@ def create():
         db.session.commit()
         return redirect('/')
 
-@app.route('/create',methods=['GET'])
+@app.route('/',methods=['GET'])
 def RetrieveList():
     students=StudentModel.query.all()
     return render_template('index.html',students=students)
 
 @app.route('/<int:id>/edit',methods=['GET','POST'])
-
 def update(id):
     student = StudentModel.query.filter_by(id=id).first()
 
@@ -74,7 +73,7 @@ def update(id):
                     hobbies=hobbies,
                     country=country
                 )
-                db.session.update(student)
+                db.session.add(student)
                 db.session.commit()
                 return redirect('/')
             return f'Student with id = {id} Does not exist'
@@ -90,9 +89,9 @@ def delete(id):
             db.session.delete(students)
             db.session.commit()
             return redirect('/')
-            abort(404)
+        abort(404)
         #return redirect('/')
-        return render_template('delete.html')
+    return render_template('delete.html')
 
 
-app.run(host='localhost',port=5000)
+app.run(host='localhost',port=5000,debug=True)
