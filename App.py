@@ -65,7 +65,7 @@ def update(id):
                 hobbies=hobbies
                 country=request.form['country']
 
-                student= StudentModel{
+                student= StudentModel(
                     first_name=first_name,
                     last_name=last_name,
                     email=email,
@@ -73,7 +73,7 @@ def update(id):
                     gender=gender,
                     hobbies=hobbies,
                     country=country
-                }
+                )
                 db.session.update(student)
                 db.session.commit()
                 return redirect('/')
