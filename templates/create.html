@@ -1,1 +1,20 @@
-<h1>Insert Page</h1>
+{% extends 'header.html' %}
+{% include 'header.html' %}
+
+{% block title %} Add Student {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <form method="post" action="">
+    <table class="table">
+        <tr>
+            <td>First Name</td>
+            <td><input type="text" name="first_name" class="form-control"></td>
+        </tr>
+    </table>
+    </form>
+</div>
+
+
+{% endblock %}
